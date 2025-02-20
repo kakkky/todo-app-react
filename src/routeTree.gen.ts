@@ -11,12 +11,20 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as UsersRouteImport } from './routes/users/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as UsersIndexImport } from './routes/users/index'
 import { Route as TasksIndexImport } from './routes/tasks/index'
+import { Route as HealthIndexImport } from './routes/health/index'
 import { Route as TasksIdIndexImport } from './routes/tasks/$id/index'
 
 // Create/Update Routes
+
+const UsersRouteRoute = UsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -25,14 +33,20 @@ const IndexRoute = IndexImport.update({
 } as any)
 
 const UsersIndexRoute = UsersIndexImport.update({
-  id: '/users/',
-  path: '/users/',
-  getParentRoute: () => rootRoute,
+  id: '/',
+  path: '/',
+  getParentRoute: () => UsersRouteRoute,
 } as any)
 
 const TasksIndexRoute = TasksIndexImport.update({
   id: '/tasks/',
   path: '/tasks/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const HealthIndexRoute = HealthIndexImport.update({
+  id: '/health/',
+  path: '/health/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,6 +67,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/users': {
+      id: '/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof UsersRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/health/': {
+      id: '/health/'
+      path: '/health'
+      fullPath: '/health'
+      preLoaderRoute: typeof HealthIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/tasks/': {
       id: '/tasks/'
       path: '/tasks'
@@ -62,10 +90,10 @@ declare module '@tanstack/react-router' {
     }
     '/users/': {
       id: '/users/'
-      path: '/users'
-      fullPath: '/users'
+      path: '/'
+      fullPath: '/users/'
       preLoaderRoute: typeof UsersIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof UsersRouteImport
     }
     '/tasks/$id/': {
       id: '/tasks/$id/'
@@ -79,15 +107,30 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+interface UsersRouteRouteChildren {
+  UsersIndexRoute: typeof UsersIndexRoute
+}
+
+const UsersRouteRouteChildren: UsersRouteRouteChildren = {
+  UsersIndexRoute: UsersIndexRoute,
+}
+
+const UsersRouteRouteWithChildren = UsersRouteRoute._addFileChildren(
+  UsersRouteRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/users': typeof UsersRouteRouteWithChildren
+  '/health': typeof HealthIndexRoute
   '/tasks': typeof TasksIndexRoute
-  '/users': typeof UsersIndexRoute
+  '/users/': typeof UsersIndexRoute
   '/tasks/$id': typeof TasksIdIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/health': typeof HealthIndexRoute
   '/tasks': typeof TasksIndexRoute
   '/users': typeof UsersIndexRoute
   '/tasks/$id': typeof TasksIdIndexRoute
@@ -96,6 +139,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/users': typeof UsersRouteRouteWithChildren
+  '/health/': typeof HealthIndexRoute
   '/tasks/': typeof TasksIndexRoute
   '/users/': typeof UsersIndexRoute
   '/tasks/$id/': typeof TasksIdIndexRoute
@@ -103,24 +148,33 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/tasks' | '/users' | '/tasks/$id'
+  fullPaths: '/' | '/users' | '/health' | '/tasks' | '/users/' | '/tasks/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/tasks' | '/users' | '/tasks/$id'
-  id: '__root__' | '/' | '/tasks/' | '/users/' | '/tasks/$id/'
+  to: '/' | '/health' | '/tasks' | '/users' | '/tasks/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/users'
+    | '/health/'
+    | '/tasks/'
+    | '/users/'
+    | '/tasks/$id/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  UsersRouteRoute: typeof UsersRouteRouteWithChildren
+  HealthIndexRoute: typeof HealthIndexRoute
   TasksIndexRoute: typeof TasksIndexRoute
-  UsersIndexRoute: typeof UsersIndexRoute
   TasksIdIndexRoute: typeof TasksIdIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  UsersRouteRoute: UsersRouteRouteWithChildren,
+  HealthIndexRoute: HealthIndexRoute,
   TasksIndexRoute: TasksIndexRoute,
-  UsersIndexRoute: UsersIndexRoute,
   TasksIdIndexRoute: TasksIdIndexRoute,
 }
 
@@ -135,19 +189,30 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/users",
+        "/health/",
         "/tasks/",
-        "/users/",
         "/tasks/$id/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
+    "/users": {
+      "filePath": "users/route.tsx",
+      "children": [
+        "/users/"
+      ]
+    },
+    "/health/": {
+      "filePath": "health/index.tsx"
+    },
     "/tasks/": {
       "filePath": "tasks/index.tsx"
     },
     "/users/": {
-      "filePath": "users/index.tsx"
+      "filePath": "users/index.tsx",
+      "parent": "/users"
     },
     "/tasks/$id/": {
       "filePath": "tasks/$id/index.tsx"
