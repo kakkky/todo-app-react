@@ -5,5 +5,9 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
-	return <div>Hellsdgbo "/"!</div>;
+	return (
+		<>
+			<div>HOME</div>
+		</>
+	);
 }
