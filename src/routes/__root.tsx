@@ -11,6 +11,9 @@ type RootRouteContext = {
 
 export const Route = createRootRouteWithContext<RootRouteContext>()({
 	component: RouteComponent,
+	notFoundComponent: () => {
+		return <p>Not Found</p>;
+	},
 });
 
 function RouteComponent() {
@@ -23,7 +26,7 @@ function RouteComponent() {
 			<div className="bg-sky-100 w-screen h-screen">
 				<Outlet />
 			</div>
-			<TanStackRouterDevtools />
+			<TanStackRouterDevtools />{" "}
 		</>
 	);
 }
