@@ -1,7 +1,10 @@
-import React from "react";
-
 function RootPage() {
-	return <div>RootPage</div>;
+	return (
+		<div>
+			<h1>ルートページ</h1>
+			<p>これはルート</p>
+		</div>
+	);
 }
 
 export default RootPage;

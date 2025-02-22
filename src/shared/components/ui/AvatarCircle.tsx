@@ -5,7 +5,7 @@ function AvatarCircle() {
 	return (
 		<Avatar className="w-16 h-16">
 			<AvatarImage sizes="px" src="https://github.com/shadcn.png" />
-			<AvatarFallback>N</AvatarFallback>
+			<AvatarFallback>No Image</AvatarFallback>
 		</Avatar>
 	);
 }

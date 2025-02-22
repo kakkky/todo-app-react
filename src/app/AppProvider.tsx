@@ -1,3 +1,4 @@
+import ThemeProvider from "@/context/theme/ThemeProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import React, { useState, type ReactNode } from "react";
@@ -14,7 +15,7 @@ function AppProvider({ children }: AppProviderProps) {
 	return (
 		<>
 			<QueryClientProvider client={queryClient}>
-				{children}
+				<ThemeProvider>{children}</ThemeProvider>
 				<ReactQueryDevtools initialIsOpen={false} />
 			</QueryClientProvider>
 		</>
