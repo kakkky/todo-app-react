@@ -1,8 +1,10 @@
-import React from "react";
+import React, { type ReactNode } from "react";
 
-import type { ReactNode } from "@tanstack/react-router";
+type HeaderProps = {
+	children: ReactNode;
+};
 
-function Header({ children }: ReactNode) {
+function Header({ children }: HeaderProps) {
 	return (
 		<>
 			<header className="bg-blue-400 text-white shadow-md flex items-center justify-between p-3">

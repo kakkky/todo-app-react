@@ -1,4 +1,6 @@
-import type { HealthCheckMessageProps } from "../types/healthCheckMessage";
+type HealthCheckMessageProps = {
+	message: string;
+};
 
 function HealthCheckMessage({ message }: HealthCheckMessageProps) {
 	return (
