@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "./shadcn/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../shadcn/avatar";
 
 function AvatarCircle() {
 	return (

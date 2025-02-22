@@ -1,4 +1,3 @@
-import LoadingSpinner from "@/shared/components/LoadingSpinner";
 import {
 	Dialog,
 	DialogContent,
@@ -7,6 +6,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/shared/components/shadcn/dialog";
+import LoadingSpinner from "@/shared/components/ui/LoadingSpinner";
 import React, { Suspense } from "react";
 import { MdHealthAndSafety } from "react-icons/md";
 import HealhCheckContainer from "../containers/HealhCheckContainer";
