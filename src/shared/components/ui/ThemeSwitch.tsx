@@ -1,4 +1,4 @@
-import { ThemeContext } from "@/context/theme/context";
+import { ThemeContext } from "@/context/theme/self-made/context";
 import React, { useContext } from "react";
 import { MdOutlineModeNight, MdOutlineWbSunny } from "react-icons/md";
 import { Switch } from "../shadcn/switch";

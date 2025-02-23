@@ -14,7 +14,7 @@ function HealthCheckDialog() {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<MdHealthAndSafety className="w-14 h-14" />
+				<MdHealthAndSafety className="w-14 h-14 text-gray-700 dark:text-white" />
 			</DialogTrigger>
 			<DialogContent className="p-8 sm:max-w-[425px]">
 				<DialogHeader>
