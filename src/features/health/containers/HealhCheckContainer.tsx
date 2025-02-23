@@ -1,8 +1,8 @@
 import HealthCheckMessage from "../components/HealthCheckMessage";
-import { useHealthCheckMesage } from "../service/hooks";
+import { useHealthCheckMesageQuery } from "../service/hooks";
 
 function HealhCheckContainer() {
-	const data = useHealthCheckMesage();
+	const data = useHealthCheckMesageQuery();
 	if (data == null) {
 		throw new Error("fetching error");
 	}

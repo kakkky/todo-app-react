@@ -1,10 +1,9 @@
-import { ThemeContext } from "@/context/theme/self-made/context";
 import HealthCheckDialog from "@/features/health/components/HealthCheckDialog";
 import Header from "@/shared/components/layout/Header";
+import { Toaster } from "@/shared/components/shadcn/sonner";
 import AvatarCircle from "@/shared/components/ui/AvatarCircle";
 import { ModeToggle } from "@/shared/components/ui/ModeToggle";
-import ThemeSwitch from "@/shared/components/ui/ThemeSwitch";
-import React, { useContext, type ReactNode } from "react";
+import React, { type ReactNode } from "react";
 
 type RootLayoutProps = {
 	children: ReactNode;
@@ -14,13 +13,16 @@ function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<>
 			<Header>
-				<ModeToggle />
-				<HealthCheckDialog />
 				<AvatarCircle />
 			</Header>
-			<div className="bg-neutral-100 dark:bg-zinc-900 w-screen h-screen">
-				{children}
+			<div className="bg-neutral-100  w-full h-screen dark:bg-black flex items-start">
+				<div className="mt-8 mx-auto">{children}</div>
+				<div className="flex flex-col items-center gap-4 p-4">
+					<ModeToggle />
+					<HealthCheckDialog />
+				</div>
 			</div>
+			<Toaster richColors position="top-right" />
 		</>
 	);
 }

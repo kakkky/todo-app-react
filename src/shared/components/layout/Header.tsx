@@ -7,10 +7,12 @@ type HeaderProps = {
 function Header({ children }: HeaderProps) {
 	return (
 		<>
-			<header className="flex items-center justify-between p-3  text-gray-700 bg-zinc-300 dark:text-white dark:bg-zinc-800">
-				<h1 className="text-2xl font-bold">Todo App (React19 × Golang)</h1>
-				<div className="flex items-center space-x-10 pr-16 text-black">
-					{children}
+			<header className="w-full  p-3 text-zinc-800 bg-zinc-300 dark:text-white dark:bg-zinc-900">
+				<div className="flex items-center justify-between w-6xl mx-auto">
+					<h1 className="text-3xl font-bold">Todo App</h1>
+					<div className="flex items-center space-x-10 pr-16 text-black">
+						{children}
+					</div>
 				</div>
 			</header>
 		</>

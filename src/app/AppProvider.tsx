@@ -1,3 +1,4 @@
+import AuthProvider from "@/context/auth/AuthProvider";
 import { ThemeProvider } from "@/context/theme/shadcn/ThemeProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -17,7 +18,7 @@ function AppProvider({ children }: AppProviderProps) {
 			<QueryClientProvider client={queryClient}>
 				{/* <ThemeProvider>{children}</ThemeProvider> */}
 				<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-					{children}
+					<AuthProvider>{children}</AuthProvider>
 				</ThemeProvider>
 				<ReactQueryDevtools initialIsOpen={false} />
 			</QueryClientProvider>
