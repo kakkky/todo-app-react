@@ -1,8 +1,10 @@
 import AuthProvider from "@/context/auth/AuthProvider";
 import { ThemeProvider } from "@/context/theme/shadcn/ThemeProvider";
+import LoadingSpinner from "@/shared/components/ui/LoadingSpinner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import React, { useState, type ReactNode } from "react";
+import React, { Suspense, useState, type ReactNode } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 type AppProviderProps = {
 	children: ReactNode;
@@ -16,9 +18,12 @@ function AppProvider({ children }: AppProviderProps) {
 	return (
 		<>
 			<QueryClientProvider client={queryClient}>
-				{/* <ThemeProvider>{children}</ThemeProvider> */}
 				<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-					<AuthProvider>{children}</AuthProvider>
+					<Suspense fallback={<LoadingSpinner />}>
+						<ErrorBoundary fallback={<p>error</p>}>
+							<AuthProvider>{children}</AuthProvider>
+						</ErrorBoundary>
+					</Suspense>
 				</ThemeProvider>
 				<ReactQueryDevtools initialIsOpen={false} />
 			</QueryClientProvider>

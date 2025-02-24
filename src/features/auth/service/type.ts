@@ -1,4 +1,4 @@
-export type loginResponse = {
+export type loginResponseData = {
 	data: {
 		jwtToken: string;
 	};

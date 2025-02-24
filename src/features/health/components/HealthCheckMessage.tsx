@@ -3,11 +3,7 @@ type HealthCheckMessageProps = {
 };
 
 function HealthCheckMessage({ message }: HealthCheckMessageProps) {
-	return (
-		<>
-			<p className="text-xl">Backend APIからのメッセージ：{message}</p>
-		</>
-	);
+	return <>Backend APIからのメッセージ：{message}</>;
 }
 
 export default HealthCheckMessage;

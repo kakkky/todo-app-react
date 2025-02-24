@@ -1,10 +1,10 @@
 import camelcaseKeys from "camelcase-keys";
-import type { loginParams, loginResponse } from "./type";
+import type { loginParams, loginResponseData } from "./type";
 
 export async function login({
 	email,
 	password,
-}: loginParams): Promise<loginResponse> {
+}: loginParams): Promise<loginResponseData> {
 	const params: RequestInit = {
 		method: "POST",
 		body: JSON.stringify({

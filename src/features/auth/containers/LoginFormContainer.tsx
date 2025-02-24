@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { useLoginMutation } from "../service/hook";
 
 function LoginFormContainer() {
+	// フォームバリデーションを適用したフォームオブジェクトs
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -17,13 +18,16 @@ function LoginFormContainer() {
 			password: "",
 		},
 	});
+	// ミューテーション
 	const { mutate, isPending } = useLoginMutation();
+	// リダイレクト用のナビゲーション
+	const navigate = useNavigate();
 
-	const navigate = useNavigate({ from: "/login" });
+	// Submit時のイベントハンドラ
 	const handleSubmit = (values: z.infer<typeof formSchema>) => {
 		mutate(values, {
 			onSuccess: () => {
-				navigate({ to: "/" });
+				navigate({ from: "/login", to: "/" });
 				toast.success("Success to Login", {
 					description: "Enjoy your Todo app!",
 					action: {

@@ -6,7 +6,6 @@ import { Switch } from "../shadcn/switch";
 function ThemeSwitch() {
 	const { mode, toggleMode } = useContext(ThemeContext);
 	const handleOnClickChange = () => toggleMode("dark");
-	console.log(mode);
 	return (
 		<>
 			<div className="flex justify-between items-center space-x-4">
