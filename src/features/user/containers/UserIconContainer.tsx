@@ -1,5 +1,6 @@
 import { AuthContext } from "@/context/auth/context";
-import React, { useContext } from "react";
+import LoadingSpinner from "@/shared/components/ui/LoadingSpinner";
+import React, { Suspense, useContext } from "react";
 import AuthenticatedUserIcon from "../components/AuthenticatedUserIcon";
 import UnAuthenticatedUserIcon from "../components/UnAuthenticatedUserIcon";
 

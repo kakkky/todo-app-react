@@ -3,9 +3,9 @@ import camelcaseKeys from "camelcase-keys";
 import type { GetCurrentUserResponseData } from "./types";
 
 export async function getCurrentUser(): Promise<GetCurrentUserResponseData> {
-	// await new Promise((resolve) => {
-	// 	setTimeout(resolve, 1000);
-	// });
+	await new Promise((resolve) => {
+		setTimeout(resolve, 2000);
+	});
 	const jwt = getCookies("jwt");
 	const response = await fetch("http://localhost:8080/users/me", {
 		method: "GET",

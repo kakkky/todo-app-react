@@ -1,8 +1,13 @@
 import AuthProvider from "@/context/auth/AuthProvider";
 import { ThemeProvider } from "@/context/theme/shadcn/ThemeProvider";
+import { userKeys } from "@/features/user/service/keys";
+import { queryClient } from "@/queryClient";
+
 import LoadingSpinner from "@/shared/components/ui/LoadingSpinner";
+import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import React, { Suspense, useState, type ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -10,21 +15,19 @@ type AppProviderProps = {
 	children: ReactNode;
 };
 
-// QueryClientを初期化
-// エクスポートしてルーティングでも受け取れるようにする
-export const queryClient = new QueryClient();
-
 function AppProvider({ children }: AppProviderProps) {
 	return (
 		<>
 			<QueryClientProvider client={queryClient}>
-				<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+				<ErrorBoundary fallback={<p>error</p>}>
 					<Suspense fallback={<LoadingSpinner />}>
-						<ErrorBoundary fallback={<p>error</p>}>
-							<AuthProvider>{children}</AuthProvider>
-						</ErrorBoundary>
+						<AuthProvider>
+							<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+								{children}
+							</ThemeProvider>
+						</AuthProvider>
 					</Suspense>
-				</ThemeProvider>
+				</ErrorBoundary>
 				<ReactQueryDevtools initialIsOpen={false} />
 			</QueryClientProvider>
 		</>
