@@ -6,6 +6,7 @@ function HealhCheckContainer() {
 	if (data == null) {
 		throw new Error("fetching error");
 	}
+	console.log("loglog");
 	return (
 		<>
 			<HealthCheckMessage message={data.message} />

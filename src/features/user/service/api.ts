@@ -6,13 +6,12 @@ export async function getCurrentUser(): Promise<GetCurrentUserResponseData> {
 	await new Promise((resolve) => {
 		setTimeout(resolve, 2000);
 	});
-	const jwt = getCookies("jwt");
+	const jwt = getCookies("jwt"); // CookieからJWTを抽出
 	const response = await fetch("http://localhost:8080/users/me", {
 		method: "GET",
 		headers: {
 			Authorization: `Bearer ${jwt}`,
 		},
-		credentials: "include",
 	});
 	if (response.status === 401) {
 		return {
